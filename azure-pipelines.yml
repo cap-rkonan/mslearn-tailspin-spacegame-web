@@ -10,6 +10,11 @@ steps:
   inputs:
     version: '6.x'
 
+- task: UseNode@1
+  displayName: 'use Node.js 18.x'
+  inputs:
+    version: '18.x'
+
 - task: Npm@1
   displayName: 'Run npm install'
   inputs:
@@ -20,6 +25,9 @@ steps:
 
 - task: gulp@1
   displayName: 'Run gulp tasks'
+
+- script: npm cache clean --force
+  displayName: 'clear npm cache'
 
 - script: 'echo "$(Build.DefinitionName), $(Build.BuildId), $(Build.BuildNumber)" > buildinfo.txt'
   displayName: 'Write build info'
